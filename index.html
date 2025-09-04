@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">  
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width,initial-scale=1" />  
+  <title>Neon Techie — Portfolio</title>  
+  <meta name="description" content="Neon techie single-page portfolio — HTML/CSS/JS" />  <!-- Fonts (fallback to system) -->  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">  <style>  
+     
+    :root{  
+      --bg:#050507;  
+      --panel: rgba(255,255,255,0.03);  
+      --glass: rgba(255,255,255,0.04);  
+      --neon-cyan: #00f7ff;  
+      --neon-magenta: #ff2d9c;  
+      --neon-violet: #8b5cff;  
+      --neon-lime: #7cff4d;  
+      --muted:#9aa3b2;  
+      --radius:14px;  
+      --gap:1.25rem;  
+      --max-w:1100px;  
+      --ui-size:16px;  
+    }  *{box-sizing:border-box}  
+html,body{height:100%;}  
+body{  
+  margin:0;padding:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;  
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(139,92,255,0.06), transparent),  
+              radial-gradient(800px 400px at 90% 90%, rgba(0,247,255,0.03), transparent),  
+              var(--bg);  
+  color:#e6eef6;font-size:var(--ui-size);  
+  -webkit-font-smoothing:antialiased;  
+  -moz-osx-font-smoothing:grayscale;  
+  padding:2rem 1rem;  
+  display:flex;align-items:flex-start;justify-content:center;  
+}  
+
+.site{width:100%;max-width:var(--max-w)}  
+ 
+.neon-text{color:var(--neon-cyan);text-shadow:0 0 8px rgba(0,247,255,0.18),0 0 20px rgba(0,247,255,0.06)}  
+.glow{box-shadow:0 6px 20px rgba(0,0,0,0.6),0 0 18px rgba(139,92,255,0.06)}  
+
+/* Top nav */  
+header{position:sticky;top:12px;z-index:30;padding:12px 16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter:blur(6px);border-radius:12px}  
+.nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}  
+.brand{display:flex;align-items:center;gap:.75rem}  
+.logo{  
+  width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--neon-magenta),var(--neon-cyan));  
+  display:grid;place-items:center;font-weight:700;color:#051018;box-shadow:0 0 18px rgba(255,45,156,0.16);  
+}  
+nav ul{display:flex;gap:1rem;list-style:none;margin:0;padding:0}  
+nav a{color:var(--muted);text-decoration:none;padding:.45rem .6rem;border-radius:8px}  
+nav a:focus{outline:2px solid rgba(255,255,255,0.06);outline-offset:2px}  
+nav a:hover{color:var(--neon-cyan);text-shadow:0 0 12px rgba(0,247,255,0.08)}  
+
+.cta{display:inline-flex;gap:.5rem;align-items:center;padding:.45rem .7rem;border-radius:999px;background:linear-gradient(90deg, rgba(0,247,255,0.08), rgba(255,45,156,0.06));border:1px solid rgba(255,255,255,0.03)}  
+
+/* Layout */  
+main{margin-top:1rem}  
+
+.hero{display:grid;grid-template-columns:1fr 360px;gap:1.25rem;align-items:center}  
+@media (max-width:900px){.hero{grid-template-columns:1fr}}  
+
+.card{background:var(--panel);border-radius:var(--radius);padding:1.25rem;position:relative;overflow:hidden}  
+.glass{background:linear-gradient(180deg,var(--glass), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}  
+
+.hero-left h1{font-size:2.25rem;margin:0 0 .5rem}  
+.tagline{color:var(--muted);margin-bottom:1rem}  
+.actions{display:flex;gap:.75rem;align-items:center}  
+.btn{padding:.6rem .9rem;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;cursor:pointer}  
+.btn-primary{background:linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));color:#031018;font-weight:600;box-shadow:0 8px 30px rgba(0,247,255,0.06)}  
+
+.avatar{height:100%;display:grid;place-items:center}  
+.avatar svg{width:100%;max-width:280px;filter:drop-shadow(0 8px 30px rgba(0,0,0,0.6))}  
+
+/* Stats */  
+.stats{display:flex;gap:1rem;margin-top:1rem}  
+.stat{padding:.6rem;border-radius:10px;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);text-align:center;min-width:96px}  
+.stat .num{font-weight:700;font-size:1.2rem;color:var(--neon-lime)}  
+.small{font-size:.85rem;color:var(--muted)}  
+
+/* Projects */  
+.section{margin-top:1.5rem}  
+.section h2{margin:0 0 .75rem}  
+.filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}  
+.chip{padding:.45rem .6rem;border-radius:999px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}  
+.chip.active{background:linear-gradient(90deg,var(--neon-magenta),var(--neon-cyan));color:#031018}  
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}  
+@media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}  
+@media (max-width:600px){.grid{grid-template-columns:1fr}}  
+
+.project-card{position:relative;overflow:hidden;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);transition:transform .28s,box-shadow .28s}  
+.project-card:hover{transform:translateY(-8px);box-shadow:0 24px 60px rgba(0,0,0,0.6),0 0 28px rgba(139,92,255,0.04)}  
+.project-media{height:160px;background:#07070a;display:grid;place-items:center}  
+.project-body{padding:1rem}  
+.tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem}  
+.tag{font-size:.75rem;padding:.25rem .45rem;border-radius:6px;border:1px solid rgba(255,255,255,0.03)}  
+.project-actions{display:flex;gap:.5rem;margin-top:8px}  
+
+/* Skills */  
+.skills{display:flex;gap:1rem;flex-wrap:wrap}  
+.skill{flex:1 1 200px}  
+.bar{height:12px;border-radius:999px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));overflow:hidden}  
+.bar > i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-magenta));transition:width 900ms cubic-bezier(.2,.9,.2,1)}  
+
+/* Contact form */  
+form{display:grid;gap:.6rem}  
+input,textarea{padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}  
+.muted{color:var(--muted);font-size:.9rem}  
+
+footer{margin-top:2rem;padding:1rem;text-align:center;color:var(--muted);font-size:.9rem}  
+
+/* small helpers */  
+.hidden{display:none}  
+.kbd{background:rgba(0,0,0,0.3);padding:.15rem .4rem;border-radius:6px;font-size:.85rem}
+
+</style></head>
+
+<body>  
+  <div class="site" id="site"><header class="glass">  
+  <div class="nav">  
+    <div class="brand">  
+      <div class="logo" aria-hidden>NT</div>  
+      <div>  
+        <div class="neon-text" style="font-weight:600">Neon Techie</div>  
+        <div class="muted" style="font-size:.85rem">Frontend • UI • JS</div>  
+      </div>  
+    </div>  <nav aria-label="Primary" id="main-nav">  
+  <ul>  
+    <li><a href="#home">Home</a></li>  
+    <li><a href="#about">About</a></li>  
+    <li><a href="#projects">Projects</a></li> 
+  </ul>  
+</nav>  
+
+
+
+  </div>  
+</header>  <main>  
+  <section id="home" class="hero">  
+    <div class="card hero-left glass">  
+      <h1>Hi — I'm Mohith, a Neon-Tech Frontend Dev</h1>  
+      <p class="tagline">I build crisp, accessible interfaces with a cyberpunk neon touch. I love JS, animations, and small performant apps.</p>  <div class="actions">  
+    <button class="btn btn-primary" id="view-projects">See projects</button>  
+    <a class="btn" href="mailto:youremail@example.com">Contact me</a>  
+  </div>  
+
+  <div class="stats" aria-hidden>  
+    <div class="stat"><div class="num" data-from="0" data-to="3">0</div><div class="small">Years</div></div>  
+    <div class="stat"><div class="num" data-from="0" data-to="24">0</div><div class="small">Projects</div></div>  
+    <div class="stat"><div class="num" data-from="0" data-to="10">0</div><div class="small">Open Source PRs</div></div>  
+  </div>  
+</div>  
+
+<aside class="card avatar glass" aria-hidden>  
+  <!-- Simple neon SVG illustration -->  
+  <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Neon avatar">  
+    <defs>  
+      <linearGradient id="g1" x1="0" x2="1">  
+        <stop offset="0" stop-color="#00f7ff"/>  
+        <stop offset="1" stop-color="#ff2d9c"/>  
+      </linearGradient>  
+    </defs>  
+    <rect x="10" y="10" width="180" height="180" rx="20" fill="none" stroke="url(#g1)" stroke-width="2" opacity="0.7"/>  
+    <g transform="translate(30,40)">  
+      <circle cx="50" cy="30" r="22" fill="rgba(255,255,255,0.02)" stroke="url(#g1)" stroke-width="1.6"/>  
+      <rect x="18" y="70" width="64" height="40" rx="6" fill="none" stroke="url(#g1)" stroke-width="1.4"/>  
+    </g>  
+  </svg>  
+</aside>
+
+  </section>    <section id="about" class="section">  
+    <div class="card glass">  
+      <h2>About</h2>  
+      <p>I build modern frontends using semantic HTML, accessible CSS, and vanilla JS — with occasional React. I'm focused on performance, UX, and delightful micro-interactions.</p>  
+      <div style="display:flex;gap:1rem;margin-top:1rem;align-items:center;flex-wrap:wrap">  
+        <div class="small" style="min-width:160px">Location: Chennai, India</div>  
+        <div class="small">Email: <a href="mailto:youremail@example.com">youremail@example.com</a></div>  
+        <div class="small">Availability: Open to freelance & internships</div>  
+      </div>  
+    </div>  
+  </section>    <section id="projects" class="section">  
+    <div class="card glass">  
+      <h2>Projects</h2>  
+      <div class="filters" role="toolbar" aria-label="Project filters">  
+        <button class="chip active" data-filter="all">All</button>  
+        <button class="chip" data-filter="vanilla">HTML/CSS/JS</button>  
+        <button class="chip" data-filter="react">React</button>  
+        <button class="chip" data-filter="api">APIs</button>  
+      </div>  <div class="grid" id="projects-grid" aria-live="polite">  
+    <!-- Project cards-->  
+    <article class="project-card" data-tags="vanilla" tabindex="0">  
+      <div class="project-media"><img loading="lazy" alt="Todo app" style="width:90%;height:100%;object-fit:contain;filter:opacity(.9)" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='320'><rect width='100%' height='100%' fill='%2307070a'/><text x='50%' y='50%' fill='%23ffffff' font-size='22' text-anchor='middle' dominant-baseline='middle'>To-Do App</text></svg>"></div>  
+      <div class="project-body">  
+        <h3>To‑Do App</h3>  
+        <p class="muted">A small persistence-backed to-do list with localStorage, filters and keyboard shortcuts.</p>  
+        <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JS</span></div>  
+        <div class="project-actions"><a class="btn" href="#">Live</a><a class="btn" href="#">Repo</a></div>  
+      </div>  
+    </article>  
+
+    <article class="project-card" data-tags="react" tabindex="0">  
+      <div class="project-media"><img loading="lazy" alt="YouTube clone" style="width:90%;height:100%;object-fit:contain;" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='320'><rect width='100%' height='100%' fill='%2307070a'/><text x='50%' y='50%' fill='%23ffffff' font-size='22' text-anchor='middle' dominant-baseline='middle'>YouTube Clone</text></svg>"></div>  
+      <div class="project-body">  
+        <h3>YouTube Clone</h3>  
+        <p class="muted">Responsive UI clone built for learning — focuses on layout, cards, and search UI.</p>  
+        <div class="tags"><span class="tag">React</span><span class="tag">Tailwind</span></div>  
+        <div class="project-actions"><a class="btn" href="#">Live</a><a class="btn" href="#">Repo</a></div>  
+      </div>  
+    </article>  
+
+    <article class="project-card" data-tags="api" tabindex="0">  
+      <div class="project-media"><img loading="lazy" alt="Weather app" style="width:90%;height:100%;object-fit:contain;" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='320'><rect width='100%' height='100%' fill='%2307070a'/><text x='50%' y='50%' fill='%23ffffff' font-size='22' text-anchor='middle' dominant-baseline='middle'>Weather App</text></svg>"></div>  
+      <div class="project-body">  
+        <h3>Weather App</h3>  
+        <p class="muted">Demo fetching weather from an API, with icon, temperature and forecast cards.</p>  
+        <div class="tags"><span class="tag">Fetch</span><span class="tag">API</span></div>  
+        <div class="project-actions"><a class="btn" href="#">Live</a><a class="btn" href="#">Repo</a></div>  
+      </div>  
+    </article>  
+
+    <article class="project-card" data-tags="vanilla api" tabindex="0">  
+      <div class="project-media"><img loading="lazy" alt="Calculator" style="width:90%;height:100%;object-fit:contain;" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='320'><rect width='100%' height='100%' fill='%2307070a'/><text x='50%' y='50%' fill='%23ffffff' font-size='22' text-anchor='middle' dominant-baseline='middle'>Tip Calculator</text></svg>"></div>  
+      <div class="project-body">  
+        <h3>Tip Calculator</h3>  
+        <p class="muted">Small utility app that demonstrates forms, calculations, and state handling.</p>  
+        <div class="tags"><span class="tag">HTML</span><span class="tag">JS</span></div>  
+        <div class="project-actions"><a class="btn" href="#">Live</a><a class="btn" href="#">Repo</a></div>  
+      </div>  
+    </article>  
+
+  </div>  
+</div>
+
+  </section>    <section id="skills" class="section">  
+    <div class="card glass">  
+      <h2>Skills</h2>  
+      <div class="skills">  
+        <div class="skill">  
+          <div class="small">HTML & CSS</div>  
+          <div class="bar" data-value="95"><i></i></div>  
+        </div>  
+        <div class="skill">  
+          <div class="small">JavaScript</div>  
+          <div class="bar" data-value="85"><i></i></div>  
+        </div>  
+        
+      </div>  <div style="margin-top:1rem;color:var(--muted);font-size:.95rem">Learning roadmap: Advanced JS → APIs → Testing → Performance</div>  
+</div>
+
+  </section>    <section id="contact" class="section">  
+    <div class="card glass">  
+      <h2>Contact</h2>  
+      <form id="contact-form" aria-label="Contact form">  
+        <label class="muted">Name<input required name="name" placeholder="Your name" /></label>  
+        <label class="muted">Email<input required type="email" name="email" placeholder="you@example.com" /></label>  
+        <label class="muted">Message<textarea required name="message" rows="4" placeholder="Say hi — tell me about your project"></textarea></label>  
+        <div style="display:flex;gap:.6rem;align-items:center">  
+          <button type="submit" class="btn btn-primary">Send</button>  
+          <div id="form-status" class="muted" aria-live="polite"></div>  
+        </div>  
+      </form>  
+    </div>  
+  </section>    <footer>  
+    <div>©<span id="year"></span> Mohith Kanna — Neon Techie</div>  
+    <div style="margin-top:.4rem" class="muted">Keyboard accessible • Built with ❤️</div>  
+  </footer>  </main>    </div>  <script>  
+    
+    const doc = document;  
+    const el = s => doc.querySelector(s);  
+    const els = s => Array.from(doc.querySelectorAll(s));  // Year  
+el('#year').textContent = new Date().getFullYear();  
+
+doc.querySelectorAll('a[href^="#"]').forEach(a => {  
+  a.addEventListener('click', e =>{  
+    const href = a.getAttribute('href');  
+    if(href.startsWith('#')){  
+      e.preventDefault();  
+      const target = doc.querySelector(href);  
+      if(target) target.scrollIntoView({behavior:'smooth',block:'start'});  
+    }  
+  })  
+});  
+
+// Theme toggle persisted in localStorage  
+const THEME_KEY = 'neon_theme';  
+const site = el('#site');  
+const themeToggle = el('#theme-toggle');  
+function applyTheme(t){  
+  if(t === 'muted'){  
+    site.style.filter = 'saturate(.6)';  
+    themeToggle.setAttribute('aria-pressed','true');  
+  } else {  
+    site.style.filter = '';  
+    themeToggle.setAttribute('aria-pressed','false');  
+  }  
+  localStorage.setItem(THEME_KEY,t);  
+}  
+themeToggle.addEventListener('click', ()=>{  
+  const cur = localStorage.getItem(THEME_KEY) || 'neon';  
+  applyTheme(cur === 'neon' ? 'muted' : 'neon');  
+});  
+// init  
+applyTheme(localStorage.getItem(THEME_KEY) || 'neon');  
+
+// Project filtering  
+const chips = els('.chip');  
+const cards = els('.project-card');  
+chips.forEach(ch => ch.addEventListener('click', ()=>{  
+  chips.forEach(c=>c.classList.remove('active'));  
+  ch.classList.add('active');  
+  const f = ch.dataset.filter;  
+  cards.forEach(card => {  
+    const tags = card.dataset.tags.split(' ');  
+    if(f === 'all' || tags.includes(f)){  
+      card.style.display = '';  
+    } else card.style.display = 'none';  
+  })  
+}));  
+
+// Stats counters (simple)  
+function animateCounters(){  
+  els('.num').forEach(elm => {  
+    const to = Number(elm.dataset.to||0);  
+    const from = Number(elm.dataset.from||0);  
+    let start = null;  
+    function step(ts){  
+      if(!start) start = ts;  
+      const progress = Math.min((ts-start)/1200,1);  
+      const val = Math.floor(from + (to-from)*progress);  
+      elm.textContent = val;  
+      if(progress<1) requestAnimationFrame(step);  
+    }  
+    requestAnimationFrame(step);  
+  })  
+}  
+
+// IntersectionObserver for entrance and skill bars  
+const io = new IntersectionObserver(entries =>{  
+  entries.forEach(en=>{  
+    if(en.isIntersecting){  
+      en.target.classList.add('inview');  
+      if(en.target.id === 'skills'){  
+        // animate skill bars  
+        els('.bar').forEach(b => {  
+          const pct = b.dataset.value || 50;  
+          const inner = b.querySelector('i');  
+          inner.style.width = pct + '%';  
+        });  
+      }  
+      if(en.target.id === 'home') animateCounters();  
+    }  
+  })  
+},{threshold:0.18});  
+['#home','#about','#projects','#skills','#contact'].forEach(sel =>{  
+  const node = el(sel);  
+  if(node) io.observe(node);  
+});  
+
+// Contact form mock submit  
+const form = el('#contact-form');  
+const status = el('#form-status');  
+form.addEventListener('submit', async (e) =>{  
+  e.preventDefault();  
+  const data = new FormData(form);  
+  status.textContent = 'Sending...';  
+  const btn = form.querySelector('button[type=submit]');  
+  btn.disabled = true;  
+  // mock network delay  
+  await new Promise(r=>setTimeout(r,900));  
+  // simple validation (HTML does it too)  
+  status.textContent = 'Sent — thank you! (mock)';  
+  btn.disabled = false;  
+  form.reset();  
+});  
+
+// Keyboard accessibility: focus styles for project cards  
+cards.forEach(c => c.addEventListener('keydown', (e)=>{  
+  if(e.key === 'Enter'){  
+    const link = c.querySelector('.project-actions a');  
+    if(link) link.click();  
+  }  
+}));
+
